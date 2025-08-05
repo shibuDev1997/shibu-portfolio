@@ -1,186 +1,135 @@
-"use client"
-
-import { useState, useEffect, useCallback } from "react"
 import { Button } from "@/components/ui/button"
-import { ArrowDown, Github, Linkedin, Mail, Code, Zap } from "lucide-react"
+import { ArrowDown, Download, Code2, Sparkles, Zap, Rocket } from "lucide-react"
 import Link from "next/link"
+import React from "react"
 
-const TYPING_SPEED = 150
-const DELETING_SPEED = 75
-const PAUSE_TIME = 3000
-
-const roles = ["Front-End Developer", "React Specialist", "Next.js Expert", "UI/UX Enthusiast", "TypeScript Developer"]
-
-export function HeroSection() {
-  const [displayText, setDisplayText] = useState("")
-  const [currentRoleIndex, setCurrentRoleIndex] = useState(0)
-  const [isDeleting, setIsDeleting] = useState(false)
-  const [isPaused, setIsPaused] = useState(false)
-  const [isVisible, setIsVisible] = useState(false)
-
-  useEffect(() => {
-    setIsVisible(true)
-  }, [])
-
-  const typeText = useCallback(() => {
-    const currentRole = roles[currentRoleIndex]
-
-    if (isPaused) {
-      setTimeout(() => setIsPaused(false), PAUSE_TIME)
-      return
-    }
-
-    if (!isDeleting) {
-      if (displayText.length < currentRole.length) {
-        setDisplayText(currentRole.slice(0, displayText.length + 1))
-      } else {
-        setIsPaused(true)
-        setIsDeleting(true)
-      }
-    } else {
-      if (displayText.length > 0) {
-        setDisplayText(currentRole.slice(0, displayText.length - 1))
-      } else {
-        setIsDeleting(false)
-        setCurrentRoleIndex((prev) => (prev + 1) % roles.length)
-      }
-    }
-  }, [displayText, currentRoleIndex, isDeleting, isPaused])
-
-  useEffect(() => {
-    if (!isPaused) {
-      const timeout = setTimeout(typeText, isDeleting ? DELETING_SPEED : TYPING_SPEED)
-      return () => clearTimeout(timeout)
-    }
-  }, [typeText, isDeleting, isPaused])
-
+export const HeroSection = React.memo(function HeroSection() {
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-teal-700 via-emerald-600 to-lime-300"
-    >
-      <div className="absolute inset-0 bg-black/10" />
+    <section id="home" className="min-h-screen flex items-center justify-center pt-20 relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/10" />
+      <div className="absolute inset-0 bg-gradient-hero opacity-5" />
 
+      <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full blur-3xl animate-float" />
       <div
-        className={`container mx-auto px-4 my-24 relative z-10 transition-all duration-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
-      >
-        <div className="text-center space-y-12 max-w-4xl mx-auto">
-          {/* Main Heading */}
-          <div
-            className={`space-y-6 transition-all duration-1000 delay-300 ease-out ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
-          >
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-white drop-shadow-lg">
-              <span className="block">Hi, I'm</span>
-              <span className="block mt-4 bg-gradient-to-r from-lime-200 to-yellow-200 bg-clip-text text-transparent">
-                Shibu J
-              </span>
-            </h1>
+        className="absolute bottom-20 right-10 w-96 h-96 bg-gradient-to-br from-accent/30 to-highlight/30 rounded-full blur-3xl animate-float"
+        style={{ animationDelay: "1s" }}
+      />
+      <div
+        className="absolute top-1/2 left-1/2 w-64 h-64 bg-gradient-to-br from-warning/20 to-primary/20 rounded-full blur-3xl animate-float"
+        style={{ animationDelay: "2s" }}
+      />
 
-            <div className="text-2xl sm:text-3xl md:text-4xl text-white/90 font-medium min-h-[3rem] flex items-center justify-center">
-              <span className="border-r-2 border-white/70 pr-1 animate-pulse">{displayText}</span>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+        <div className="space-y-8">
+          <div className="flex justify-center space-x-8 mb-8 animate-fade-in">
+            <div className="p-4 bg-gradient-to-br from-primary to-secondary rounded-2xl shadow-glow animate-pulse">
+              <Code2 className="h-10 w-10 text-white" />
+            </div>
+            <div
+              className="p-4 bg-gradient-to-br from-secondary to-accent rounded-2xl shadow-glow-cyan animate-pulse"
+              style={{ animationDelay: "0.5s" }}
+            >
+              <Rocket className="h-10 w-10 text-white" />
+            </div>
+            <div
+              className="p-4 bg-gradient-to-br from-accent to-highlight rounded-2xl shadow-glow-purple animate-pulse"
+              style={{ animationDelay: "1s" }}
+            >
+              <Zap className="h-10 w-10 text-white" />
+            </div>
+            <div
+              className="p-4 bg-gradient-to-br from-highlight to-warning rounded-2xl shadow-glow-highlight animate-pulse"
+              style={{ animationDelay: "1.5s" }}
+            >
+              <Sparkles className="h-10 w-10 text-white" />
             </div>
           </div>
 
-          {/* Description */}
-          <p
-            className={`text-lg sm:text-xl md:text-2xl text-white/80 max-w-4xl mx-auto leading-relaxed transition-all duration-1000 delay-500 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-          >
-            Crafting <span className="text-lime-200 font-semibold">exceptional digital experiences</span> with React,
-            Next.js, and cutting-edge web technologies.
-            <span className="text-yellow-200 font-semibold"> 2+ years</span> of expertise in building scalable,
-            user-centric applications.
-          </p>
-
-          {/* Social Links */}
-          <div
-            className={`flex justify-center space-x-8 transition-all duration-1000 delay-700 ease-out ${isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"}`}
-          >
-            <Link
-              href="https://github.com/shibuDev1997"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group p-4 rounded-full bg-gray-900 hover:bg-gray-800 transition-all duration-500 ease-out hover:scale-110 shadow-lg hover:shadow-xl"
-            >
-              <Github className="w-8 h-8 text-white group-hover:rotate-12 transition-transform duration-500 ease-out" />
-            </Link>
-            <Link
-              href="https://www.linkedin.com/in/shibuj1997"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group p-4 rounded-full bg-blue-600 hover:bg-blue-700 transition-all duration-500 ease-out hover:scale-110 shadow-lg hover:shadow-xl"
-            >
-              <Linkedin className="w-8 h-8 text-white group-hover:rotate-12 transition-transform duration-500 ease-out" />
-            </Link>
-            <Link
-              href="mailto:jshibu779@gmail.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group p-4 rounded-full bg-red-600 hover:bg-red-700 transition-all duration-500 ease-out hover:scale-110 shadow-lg hover:shadow-xl"
-            >
-              <Mail className="w-8 h-8 text-white group-hover:rotate-12 transition-transform duration-500 ease-out" />
-            </Link>
+          <div className="animate-fade-in">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-6 leading-tight">
+              <span className="block text-gradient-rainbow animate-slide-up glow-text">Shibu J</span>
+            </h1>
+            <p className="text-2xl sm:text-3xl md:text-4xl text-transparent bg-gradient-to-r from-secondary to-accent bg-clip-text font-bold mb-8 animate-slide-up">
+              Front-End Developer & React.js Specialist
+            </p>
           </div>
 
-          {/* CTA Buttons */}
-          <div
-            className={`flex flex-col sm:flex-row gap-6 justify-center items-center transition-all duration-1000 delay-1000 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-          >
+          <div className="max-w-4xl mx-auto animate-slide-up">
+            <p className="text-xl sm:text-2xl text-muted-foreground leading-relaxed mb-12">
+              Crafting <span className="text-primary font-bold glow-text">cutting-edge</span> web applications with{" "}
+              <span className="text-secondary font-bold">3+ years</span> of experience in{" "}
+              <span className="text-accent font-bold">React.js</span>,{" "}
+              <span className="text-highlight font-bold">Next.js</span>, and{" "}
+              <span className="text-warning font-bold">TypeScript</span>
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row gap-6 justify-center animate-slide-up">
             <Button
               asChild
               size="lg"
-              className="px-8 py-4 text-lg bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white border-0 transition-all duration-500 ease-out hover:scale-105 shadow-lg hover:shadow-xl"
+              className="group bg-gradient-to-r from-primary via-secondary to-accent hover:from-primary/90 hover:via-secondary/90 hover:to-accent/90 text-white px-10 py-6 text-xl rounded-2xl shadow-glow-lg hover:shadow-glow transition-all duration-500 hover:scale-110 animate-pulse"
             >
-              <Link href="#projects" className="flex items-center">
-                <Code className="w-6 h-6 mr-3" />
-                View Projects
+              <Link href="#contact">
+                <Zap className="mr-3 h-6 w-6 group-hover:rotate-12 transition-transform duration-300" />
+                Get In Touch
+                <ArrowDown className="ml-3 h-6 w-6 group-hover:translate-y-1 transition-transform duration-300" />
               </Link>
             </Button>
-
             <Button
               asChild
               variant="outline"
               size="lg"
-              className="px-8 py-4 text-lg border-2 border-white/30 text-white hover:bg-white/10 transition-all duration-500 ease-out hover:scale-105 backdrop-blur-sm"
+              className="group border-3 border-primary/50 hover:border-primary bg-card hover:bg-gradient-to-r hover:from-primary/10 hover:to-secondary/10 text-primary px-10 py-6 text-xl rounded-2xl backdrop-blur-sm hover:shadow-glow-cyan transition-all duration-500 hover:scale-110"
             >
-              <Link href="#contact" className="flex items-center">
-                <Zap className="w-6 h-6 mr-3" />
-                Get In Touch
+              <Link href="/resume.pdf" target="_blank">
+                <Download className="mr-3 h-6 w-6 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-300" />
+                Download Resume
               </Link>
             </Button>
           </div>
 
-          {/* Stats */}
-          <div
-            className={`grid grid-cols-3 gap-8 max-w-2xl mx-auto transition-all duration-1000 delay-1200 ease-out ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
-          >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20 animate-fade-in">
             {[
-              { number: "2+", label: "Years Experience" },
-              { number: "15+", label: "Projects Completed" },
-              { number: "10+", label: "Technologies Mastered" },
+              { number: "3+", label: "Years Experience", gradient: "from-primary to-secondary", shadow: "shadow-glow" },
+              {
+                number: "15+",
+                label: "Projects Completed",
+                gradient: "from-secondary to-accent",
+                shadow: "shadow-glow-cyan",
+              },
+              {
+                number: "5+",
+                label: "Technologies",
+                gradient: "from-accent to-highlight",
+                shadow: "shadow-glow-purple",
+              },
+              {
+                number: "100%",
+                label: "Client Satisfaction",
+                gradient: "from-highlight to-warning",
+                shadow: "shadow-glow-highlight",
+              },
             ].map((stat, index) => (
               <div
-                key={stat.label}
-                className="text-center bg-white/10 backdrop-blur-sm rounded-lg p-6 hover:bg-white/20 transition-all duration-500 ease-out hover:scale-105"
+                key={index}
+                className={`p-8 bg-gradient-to-br ${stat.gradient} rounded-3xl ${stat.shadow} transition-all duration-500 hover:scale-110 hover:-translate-y-2 group cursor-pointer`}
               >
-                <div className="text-3xl md:text-4xl font-bold text-lime-200 mb-2">{stat.number}</div>
-                <div className="text-sm text-white/80 font-medium">{stat.label}</div>
+                <div className="text-4xl md:text-5xl font-bold text-white group-hover:scale-125 transition-transform duration-300 glow-text">
+                  {stat.number}
+                </div>
+                <div className="text-sm md:text-base text-white/90 mt-2 font-semibold">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-        <Link href="#about" className="group">
-          <div className="flex flex-col items-center space-y-2 animate-bounce">
-            <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center group-hover:border-white transition-colors duration-300">
-              <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse" />
-            </div>
-            <ArrowDown className="w-4 h-4 text-white/70 group-hover:text-white transition-colors duration-300" />
-          </div>
-        </Link>
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+        <div className="w-8 h-12 border-3 border-primary/50 rounded-full flex justify-center bg-gradient-to-b from-primary/20 to-secondary/20 backdrop-blur-sm">
+          <div className="w-2 h-4 bg-gradient-to-b from-primary to-secondary rounded-full mt-2 animate-pulse" />
+        </div>
       </div>
     </section>
   )
-}
+})
