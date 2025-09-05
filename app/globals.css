@@ -1,71 +1,84 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: 0 0% 100%;
-  --foreground: 222 47% 11%;
-  --card: 0 0% 100%;
-  --card-foreground: 222 47% 11%;
-  --popover: 0 0% 100%;
-  --popover-foreground: 222 47% 11%;
-  --primary: 217 91% 53%;
-  --primary-foreground: 0 0% 100%;
-  --secondary: 217 91% 60%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: 210 100% 97%;
-  --muted-foreground: 210 20% 40%;
-  --accent: 217 91% 67%;
-  --accent-foreground: 0 0% 0%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%;
-  --border: 210 100% 90%;
-  --input: 210 100% 90%;
-  --ring: 217 91% 53%;
-  --radius: 0.75rem;
-  --sidebar: 0 0% 100%;
-  --sidebar-foreground: 222 47% 11%;
-  --sidebar-primary: 217 91% 53%;
-  --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 217 91% 67%;
-  --sidebar-accent-foreground: 0 0% 0%;
-  --sidebar-border: 210 100% 90%;
-  --sidebar-ring: 217 91% 53%;
-  --highlight: 195 100% 50%;
+  /* Updated to VS Code-inspired dark theme colors */
+  --background: oklch(0.118 0 0); /* #1e1e1e - VS Code dark background */
+  --foreground: oklch(0.985 0 0); /* #ffffff - white text */
+  --card: oklch(0.157 0 0); /* #282c34 - darker card background */
+  --card-foreground: oklch(0.953 0 0); /* #f3f3f3 - light gray text */
+  --popover: oklch(0.18 0 0); /* #2e2e2e - popover background */
+  --popover-foreground: oklch(0.985 0 0); /* #ffffff - white text */
+  --primary: oklch(0.488 0.243 264.376); /* #007acc - VS Code blue */
+  --primary-foreground: oklch(0.985 0 0); /* #ffffff - white text */
+  --secondary: oklch(0.953 0 0); /* #f3f3f3 - light gray */
+  --secondary-foreground: oklch(0.118 0 0); /* #1e1e1e - dark text */
+  --muted: oklch(0.302 0 0); /* #4d4d4d - muted gray */
+  --muted-foreground: oklch(0.985 0 0); /* #ffffff - white text */
+  --accent: oklch(0.488 0.243 264.376); /* #007acc - VS Code blue accent */
+  --accent-foreground: oklch(0.985 0 0); /* #ffffff - white text */
+  --destructive: oklch(0.577 0.245 27.325); /* #dc2626 - red for errors */
+  --destructive-foreground: oklch(0.985 0 0); /* #ffffff - white text */
+  --border: oklch(0.227 0 0); /* #3a3a3a - border color */
+  --input: oklch(0.227 0 0); /* #3a3a3a - input background */
+  --ring: oklch(0.488 0.243 264.376); /* #007acc - focus ring */
+  --chart-1: oklch(0.488 0.243 264.376); /* #007acc - VS Code blue */
+  --chart-2: oklch(0.696 0.17 162.48); /* #f59e0b - orange accent */
+  --chart-3: oklch(0.577 0.245 27.325); /* #dc2626 - red */
+  --chart-4: oklch(0.627 0.265 303.9); /* #4caf50 - green */
+  --chart-5: oklch(0.645 0.246 16.439); /* #ff9800 - amber */
+  --radius: 0.25rem; /* Smaller radius for VS Code feel */
+  --sidebar: oklch(0.118 0 0); /* #1e1e1e - sidebar background */
+  --sidebar-foreground: oklch(0.985 0 0); /* #ffffff - sidebar text */
+  --sidebar-primary: oklch(0.488 0.243 264.376); /* #007acc - active link */
+  --sidebar-primary-foreground: oklch(0.985 0 0); /* #ffffff - active text */
+  --sidebar-accent: oklch(0.696 0.17 162.48); /* #f59e0b - sidebar accent */
+  --sidebar-accent-foreground: oklch(0.118 0 0); /* #1e1e1e - accent text */
+  --sidebar-border: oklch(0.227 0 0); /* #3a3a3a - sidebar border */
+  --sidebar-ring: oklch(0.488 0.243 264.376); /* #007acc - sidebar focus */
 }
 
 .dark {
-  --background: 222 47% 11%;
-  --foreground: 210 20% 91%;
-  --card: 222 47% 15%;
-  --card-foreground: 210 20% 91%;
-  --popover: 222 47% 15%;
-  --popover-foreground: 210 20% 91%;
-  --primary: 217 91% 60%;
-  --primary-foreground: 0 0% 0%;
-  --secondary: 217 91% 67%;
-  --secondary-foreground: 0 0% 0%;
-  --muted: 210 20% 20%;
-  --muted-foreground: 210 20% 60%;
-  --accent: 217 91% 53%;
-  --accent-foreground: 0 0% 100%;
-  --destructive: 0 84% 60%;
-  --destructive-foreground: 210 20% 91%;
-  --border: 210 20% 30%;
-  --input: 210 20% 30%;
-  --ring: 217 91% 60%;
-  --sidebar: 222 47% 11%;
-  --sidebar-foreground: 210 20% 91%;
-  --sidebar-primary: 217 91% 60%;
-  --sidebar-primary-foreground: 0 0% 0%;
-  --sidebar-accent: 217 91% 53%;
-  --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-border: 210 20% 30%;
-  --sidebar-ring: 217 91% 60%;
-  --highlight: 195 100% 50%;
+  /* Dark mode uses same colors as root for consistent VS Code theme */
+  --background: oklch(0.118 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.157 0 0);
+  --card-foreground: oklch(0.953 0 0);
+  --popover: oklch(0.18 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.488 0.243 264.376);
+  --primary-foreground: oklch(0.985 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.302 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.488 0.243 264.376);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.985 0 0);
+  --border: oklch(0.227 0 0);
+  --input: oklch(0.227 0 0);
+  --ring: oklch(0.488 0.243 264.376);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.577 0.245 27.325);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.118 0 0);
+  --sidebar-foreground: oklch(0.985 0 0);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.985 0 0);
+  --sidebar-accent: oklch(0.269 0 0);
+  --sidebar-accent-foreground: oklch(0.985 0 0);
+  --sidebar-border: oklch(0.227 0 0);
+  --sidebar-ring: oklch(0.488 0.243 264.376);
 }
 
 @theme inline {
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -102,167 +115,73 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-  --highlight: var(--highlight);
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
   }
-}
-
-@layer utilities {
+  /* Added VS Code-specific styles */
+  .vscode-tab {
+    @apply bg-card border-border border-b-2 border-b-transparent hover:border-b-primary transition-colors duration-200;
+  }
+  .vscode-tab.active {
+    @apply border-b-primary bg-background;
+  }
+  .terminal-input {
+    @apply bg-transparent border-none outline-none text-foreground font-mono;
+  }
+  .typing-animation {
+    @apply animate-pulse;
+  }
+  /* Added smooth animations and transitions */
   .animate-fade-in {
-    animation: fadeIn 0.6s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out;
   }
-
   .animate-slide-up {
-    animation: slideUp 0.8s ease-out;
+    animation: slideUp 0.6s ease-out;
+  }
+  .animate-bounce-in {
+    animation: bounceIn 0.8s ease-out;
   }
 
-  .animate-slide-in-left {
-    animation: slideInLeft 0.8s ease-out;
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
-  .animate-slide-in-right {
-    animation: slideInRight 0.8s ease-out;
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
-  .text-gradient {
-    @apply bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent;
+  @keyframes bounceIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.3);
+    }
+    50% {
+      transform: scale(1.05);
+    }
+    70% {
+      transform: scale(0.9);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
   }
-
-  .text-gradient-rainbow {
-    @apply bg-gradient-to-r from-primary via-secondary via-accent to-highlight bg-clip-text text-transparent;
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease-in-out infinite;
-  }
-
-  .bg-gradient-primary {
-    @apply bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10;
-  }
-
-  .bg-gradient-card {
-    @apply bg-gradient-to-br from-white via-primary-50/30 to-secondary-50/20;
-  }
-
-  .bg-gradient-hero {
-    background: linear-gradient(135deg, #2563eb 0%, #3b82f6 25%, #60a5fa 50%, #00bfff 75%, #2563eb 100%);
-    background-size: 400% 400%;
-    animation: gradient-shift 8s ease-in-out infinite;
-  }
-
-  .shadow-glow {
-    box-shadow: 0 0 20px rgba(37, 99, 235, 0.3);
-  }
-
-  .shadow-glow-lg {
-    box-shadow: 0 0 40px rgba(37, 99, 235, 0.4);
-  }
-
-  .shadow-glow-cyan {
-    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
-  }
-
-  .shadow-glow-purple {
-    box-shadow: 0 0 20px rgba(96, 165, 250, 0.3);
-  }
-
-  .shadow-glow-highlight {
-    box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
-  }
-
-  .animate-delay-100 {
-    animation-delay: 100ms;
-  }
-
-  .animate-delay-200 {
-    animation-delay: 200ms;
-  }
-
-  .animate-delay-300 {
-    animation-delay: 300ms;
-  }
-
-  .animate-delay-500 {
-    animation-delay: 500ms;
-  }
-
-  .animate-delay-700 {
-    animation-delay: 700ms;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-muted;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-gradient-to-b from-primary to-secondary rounded-full;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  @apply from-secondary to-accent;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-::selection {
-  @apply bg-primary/20 text-primary;
-}
-
-.glow-text {
-  text-shadow: 0 0 10px currentColor;
 }
