@@ -1,44 +1,47 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
 const navigationItems = [
-  { name: "home.tsx", href: "/", icon: "📄" },
-  { name: "about.tsx", href: "/about", icon: "👤" },
-  { name: "skills.tsx", href: "/skills", icon: "⚡" },
-  { name: "projects.tsx", href: "/projects", icon: "📁" },
-  { name: "contact.tsx", href: "/contact", icon: "📧" },
+  {
+    name: "home.tsx",
+    href: "/",
+    icon: "📄",
+  },
+  {
+    name: "about.tsx",
+    href: "/about",
+    icon: "👤",
+  },
+  {
+    name: "skills.tsx",
+    href: "/skills",
+    icon: "⚡",
+  },
+  {
+    name: "projects.tsx",
+    href: "/projects",
+    icon: "📁",
+  },
+  {
+    name: "contact.tsx",
+    href: "/contact",
+    icon: "📧",
+  },
 ]
 
 export function Sidebar() {
   const pathname = usePathname()
   const [isCollapsed, setIsCollapsed] = useState(false)
 
-  // Collapse sidebar by default on small screens
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)") // md breakpoint
-    const handleChange = (e: MediaQueryListEvent | MediaQueryList) => {
-      setIsCollapsed(e.matches) // true if small screen
-    }
-
-    handleChange(mediaQuery) // set on mount
-    mediaQuery.addEventListener("change", handleChange)
-    return () => mediaQuery.removeEventListener("change", handleChange)
-  }, [])
-
   return (
     <div
       className={cn(
-        "flex flex-col bg-sidebar border-r border-sidebar-border h-screen",
-        // width transition for smooth open/close
-        "transition-[width] duration-300 ease-in-out",
+        "flex flex-col bg-sidebar border-r border-sidebar-border transition-all duration-300",
         isCollapsed ? "w-12" : "w-64",
-        // drawer-style slide on mobile
-        "fixed md:static z-50",
-        isCollapsed ? "-translate-x-0" : "translate-x-0"
       )}
     >
       {/* Sidebar Header */}
@@ -66,7 +69,7 @@ export function Sidebar() {
       )}
 
       {/* File Tree */}
-      <div className="flex-1 p-2 overflow-y-auto">
+      <div className="flex-1 p-2">
         {!isCollapsed && (
           <div className="mb-2">
             <div className="flex items-center text-sm text-sidebar-foreground mb-1">
